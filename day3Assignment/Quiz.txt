@@ -1,0 +1,7 @@
+Create a quiz application
+Fetch questions from an array of objects in a separate JS file / or from a JSON.
+Display a random questions & its options for 5 seconds.
+Shuffle the options too.
+User can select any 1 option.
+Disable all the options once user answers the question.
+Display the score at the end of the quiz.
