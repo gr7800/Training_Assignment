@@ -35,19 +35,44 @@ const renderRightSideContent = () => {
     rightWrapper.append(crashDiv, kickDiv, snareDiv, tomDiv);
 }
 
+const handleHideKeyElement = (ElementId) => {
+    let child = document.getElementById(`${ElementId}`)
+    let parent = child.parentElement;
+    parent.style.backgroundColor = "blanchedalmond";
+    setTimeout(() => {
+        let child = document.getElementById(`${ElementId}`)
+        child.remove();
+        parent.style.backgroundColor = "";
+    }, 1000)
+}
+
+const renderKeyOnPress = (i, keyname) => {
+    let keyElement = document.createElement("div");
+    keyElement.classList = "key";
+    keyElement.id = keyname
+    keyElement.innerText = keyname;
+    let BoxesCard = rightWrapper.children;
+    BoxesCard[i].append(keyElement)
+    handleHideKeyElement(keyname);
+}
+
 document.addEventListener("keypress", (e) => {
     e.preventDefault();
     if (e.key === "c") {
-        handleAudioPlay(e, "crash")
+        renderKeyOnPress(0, "C");
+        handleAudioPlay(e, "crash");
     }
     if (e.key === "k") {
-        handleAudioPlay(e, "kick")
+        renderKeyOnPress(1, "K");
+        handleAudioPlay(e, "kick");
     }
     if (e.key === "s") {
-        handleAudioPlay(e, "snare")
+        renderKeyOnPress(2, "S");
+        handleAudioPlay(e, "snare");
     }
     if (e.key === "t") {
-        handleAudioPlay(e, "tom")
+        renderKeyOnPress(3, "T");
+        handleAudioPlay(e, "tom");
     }
 })
 
