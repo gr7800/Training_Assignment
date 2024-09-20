@@ -43,8 +43,8 @@ wrapper.addEventListener("click", (e) => {
         box.id = "circle"
         box.style.backgroundColor = colors[index];
         box.style.position = "absolute";
-        box.style.left = e.pageX + 'px';
-        box.style.top = e.pageY + 'px';
+        box.style.left = e.pageX-7.5 + 'px';
+        box.style.top = e.pageY-7.5 + 'px';
         wrapper.append(box);
     }
 })
