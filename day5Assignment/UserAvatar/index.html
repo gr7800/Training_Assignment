@@ -5,30 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Avatar</title>
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <div class="parrent">
+        <h1>User Avatar Genrator</h1>
         <div class="userAvatarWrapper">
-            <button>
-                +
-            </button>
+            <div class="avtarContainer">
+
+            </div>
         </div>
         <!-- Model  -->
-        <div class="userNameModel">
-            <input type="text" name="user" placeholder="Enter User Name">
+        <div class="userNameModel" id="userModel">
+            <input type="text" name="user" placeholder="Enter User Name" id="username">
             <div>
-                <button class="modelbutton">
+                <button class="modelbutton" id="cancel">
                     Cancel
                 </button>
-                <button class="modelbutton">
+                <button class="modelbutton" id="adduser">
                     Add User
                 </button>
             </div>
         </div>
+        <div class="userNameModel" id="userDeleteModel">
+            <div class="confirmationBox" id="confirmationBoxText"></div>
+            <div>
+                <button class="modelbutton" id="cancelDelete">
+                    No
+                </button>
+                <button class="modelbutton" id="confirmDelete">
+                    Yes
+                </button>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="./script.js"></script>
 </body>
