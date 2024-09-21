@@ -101,6 +101,7 @@ const renderButton = () => {
   modelOpenbutton.id = "openModelButton";
   modelOpenbutton.addEventListener("click", (e) => handleOpenModel(e));
   userAvatarWrapper.append(modelOpenbutton);
-  document.querySelector("h1").style.color = generateRandomHexColor().lightColor;
+  document.querySelector("h1").style.color =
+    generateRandomHexColor().lightColor;
 };
 appendUserAvatar(userData);
