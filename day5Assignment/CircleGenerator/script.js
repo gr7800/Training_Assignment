@@ -37,7 +37,6 @@ reset.addEventListener("click", () => {
 
 wrapper.addEventListener("click", (e) => {
   let index = getRandomNumber(colors.length, 0);
-  // console.log(e);
   if (e.target.nodeName !== "BUTTON") {
     let box = document.createElement("span");
     box.id = "circle";

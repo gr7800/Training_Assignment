@@ -1,0 +1,16 @@
+#root {
+  margin: 0;
+  padding: 0;
+}
+.parrentWrapper{
+  width: 100%;
+  height: 100vh;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
