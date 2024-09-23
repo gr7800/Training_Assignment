@@ -1,48 +1,53 @@
+import React, { useState } from "react";
+import AvatarContainer from "./components/AvatarContainer.jsx";
+import UserModal from "./components/UserModal.jsx";
+import DeleteModal from "./components/DeleteModal.jsx";
 import "./App.css";
-import { useState } from "react";
-import Avatar from "./component/Avatar";
-import CreateUpdateModel from "./component/overlayModel/CreateUpdateModel";
 
-function App() {
-  const [avatarlist, setAvatarList] = useState([]);
-  const [modelName, setModelName] = useState("create");
-  const [isOpen, setIsOpen] = useState(false);
+const App = () => {
+  const [userData, setUserData] = useState(["Guddu", "Tiwari", "Subham", "Jay"]);
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
 
-  const handleNewAvatar = (value) => {
-    setAvatarList((prev) => [...prev, value]);
-    setIsOpen(false);
-    console.log(avatarlist);
+  const addUser = (username) => {
+    if (username) {
+      setUserData([...userData, username]);
+    }
+    setIsUserModalOpen(false);
+  };
+
+  const confirmDeleteUser = () => {
+    setUserData(userData.filter((_, index) => index !== userToDelete));
+    setIsDeleteModalOpen(false);
   };
 
   return (
-    <div className="parrentWrapper">
-      <div className="avtarWrapper">
-        {avatarlist &&
-          avatarlist?.length > 0 &&
-          avatarlist.map((el, index) => (
-            <Avatar
-              key={index + 1}
-              Name={el}
-              setAvatarList={() => setAvatarList(avatarlist.splice(index, 1))}
-            />
-          ))}
-        <button
-          onClick={() => {
-            setModelName("create");
-            setIsOpen(true);
-          }}
-        >
-          +
-        </button>
-        <CreateUpdateModel
-          modelName={modelName}
-          isOpen={isOpen}
-          setAvatarList={handleNewAvatar}
-          setIsOpen={(value) => setIsOpen(value)}
+    <div className="parent">
+      <h1>User Avatar Generator</h1>
+      <AvatarContainer
+        userData={userData}
+        onOpenUserModal={() => setIsUserModalOpen(true)}
+        onOpenDeleteModal={(index) => {
+          setUserToDelete(index);
+          setIsDeleteModalOpen(true);
+        }}
+      />
+      {isUserModalOpen && (
+        <UserModal
+          onClose={() => setIsUserModalOpen(false)}
+          onAddUser={addUser}
         />
-      </div>
+      )}
+      {isDeleteModalOpen && (
+        <DeleteModal
+          onClose={() => setIsDeleteModalOpen(false)}
+          onDeleteUser={confirmDeleteUser}
+          username={userData[userToDelete]}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default App;

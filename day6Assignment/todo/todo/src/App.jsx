@@ -1,21 +1,25 @@
-import { useState } from 'react'
-import './App.css'
-import Form from './component/Form'
-import { List } from './component/List'
+import { useEffect, useState } from 'react';
+import './App.css';
+import Form from './component/Form';
+import { List } from './component/List';
 
 function App() {
-  const [todoList,setTodoList] = useState([])
+  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem("todoItem")) || []);
+
+  useEffect(() => {
+    console.log(todoList);
+    localStorage.setItem("todoItem", JSON.stringify(todoList));
+  }, [todoList])
 
   return (
-    <div>
-      <Form setTodoList={(value)=>setTodoList(prev=>[...prev,value])} />
-        <div>
-          <List todoList={todoList} setTodoList={(value,index)=>{
-            // setTodoList(prev=>[...prev,prev[index]?.completed = value])
-          }}/>
-        </div>
+    <div className="todoApp">
+      <Form setTodoList={(value) => setTodoList((prev) => [...prev, value])} />
+      <List
+        todoList={todoList}
+        setTodoList={(updatedList) => setTodoList(updatedList)}
+      />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
