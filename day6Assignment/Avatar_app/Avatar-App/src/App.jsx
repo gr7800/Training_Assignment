@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import AvatarContainer from "./components/AvatarContainer.jsx";
 import UserModal from "./components/UserModal.jsx";
 import DeleteModal from "./components/DeleteModal.jsx";
