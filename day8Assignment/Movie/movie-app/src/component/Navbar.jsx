@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
 const Navbar = () => {
   return (
-    <header className="fixed w-full flex justify-between px-10 py-4 bg-[#020c1b]">
+    <header className="fixed w-full flex justify-between px-10 py-4 bg-[#020c1b] z-10">
       <div>
         <Link to="/">
           <img src={logo} alt="Logo" />
