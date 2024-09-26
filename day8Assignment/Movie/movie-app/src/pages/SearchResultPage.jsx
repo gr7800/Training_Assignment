@@ -1,24 +1,63 @@
 import { useLocation } from "react-router-dom";
 import ContentWrapper from "../component/ContentWrapper";
 import { useEffect, useState } from "react";
-import useSearchHook from "../hooks/useSearchHook";
+import SingleMovieCard from "../component/SingleMovieCard";
+import useFetchGenres from "../hooks/useFetchGenres";
+import useFetchSearch from "../hooks/useFetchSearch";
+import CircularProgressBar from "../component/CircularProgressBar";
 
 const SearchResultPage = () => {
+  const [initialQuery, setInitialQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [moviesList, setMoviesList] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   const location = useLocation();
   const currentPath = location.pathname;
-  const initialQuery = currentPath.split("/search/")[1] || "";
-  const { searchList, setQuery, setPage } = useSearchHook("1", initialQuery);
+  const temp = currentPath.split("/search/")[1] || "";
+  const { searchList } = useFetchSearch(page, initialQuery);
+  const { genres } = useFetchGenres();
 
   useEffect(() => {
-    setQuery(initialQuery);
-    setPage("1");
-  }, [initialQuery, setQuery, setPage]);
+    setInitialQuery(temp);
+    setPage(1);
+    setMoviesList([]);
+  }, [temp]);
 
-  console.log(searchList);
+  useEffect(() => {
+    if (searchList && searchList.length > 0) {
+      setMoviesList((prevMovies) => [...prevMovies, ...searchList]);
+      setIsFetching(false);
+    }
+  }, [searchList]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 10 && !isFetching) {
+        setIsFetching(true);
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isFetching]);
 
   return (
-    <div className="w-full py-56">
-      <ContentWrapper title={"Search results of " + initialQuery} />
+    <div className="w-full pt-[100px] px-10">
+      <ContentWrapper title={`Search results for '${initialQuery}'`} parentClass={"justify-start items-start mx-0 font-normal text-xl"} />
+      <div className="grid grid-cols-4 gap-5">
+        {moviesList && moviesList.length > 0 && moviesList.map((movie, index) => (
+          <SingleMovieCard movieData={movie} genres={genres} key={"search" + index} />
+        ))}
+      </div>
+      {isFetching && (
+        <div className="mt-10 flex justify-center">
+          <CircularProgressBar />
+        </div>
+      )}
     </div>
   );
 };

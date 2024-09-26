@@ -4,12 +4,12 @@ import 'react-circular-progressbar/dist/styles.css';
 
 const RatingCircularProgress = ({ rating }) => {
   const getPathColor = ()=>{
-    if(Number(rating)<=5){
+    if(Number(rating)>=7){
       return "green"
-    }else if(Number(rating)<=3){
-      return "red"
+    }else if(Number(rating)>=5){
+      return "orange"
     }else{
-      return "green"
+      return "red"
     }
   }
   return (

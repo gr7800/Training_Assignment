@@ -1,7 +1,7 @@
 import ContentWrapper from "./ContentWrapper";
 import Carousel from "./Crousel";
 
-const SectionWraper = ({
+const HomeSectionWraper = ({
   title,
   firstTab,
   secondTab,
@@ -24,4 +24,4 @@ const SectionWraper = ({
   );
 };
 
-export default SectionWraper;
+export default HomeSectionWraper;

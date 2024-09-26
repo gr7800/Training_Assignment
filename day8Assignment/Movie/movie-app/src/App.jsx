@@ -2,6 +2,7 @@ import "./App.css";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
 import Home from "./pages/Home";
+import Movies from "./pages/Movies";
 import SearchResultPage from "./pages/SearchResultPage";
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <div>
       <Navbar />
       {/* <Home /> */}
-      <SearchResultPage />
+      {/* <SearchResultPage /> */}
+      <Movies />
       <Footer />
     </div>
   );

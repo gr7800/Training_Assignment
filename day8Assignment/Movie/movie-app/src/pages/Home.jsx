@@ -1,10 +1,10 @@
 import HomePageMain from "../component/HomePageMain";
-import SectionWraper from "../component/SectionWraper";
 import useFetchGenres from "../hooks/useFetchGenres";
 import useFetchMovies from "../hooks/useFetchMovies";
 import { useState } from "react";
 import { randomeNumberGenrator } from "../utills/helper";
 import { ImageBaseUrl } from "../utills/constant";
+import HomeSectionWraper from "../component/HomeSectionWraper";
 
 const Home = () => {
   const [activeTabTrending, setActiveTabTrending] = useState("Day");
@@ -30,7 +30,7 @@ const Home = () => {
         <HomePageMain randomImage={ImageBaseUrl+trendingMovies[randomeNumber]?.poster_path} />
       </div>
       <div>
-        <SectionWraper
+        <HomeSectionWraper
           title={"Trending"}
           firstTab={"Day"}
           secondTab={"Week"}
