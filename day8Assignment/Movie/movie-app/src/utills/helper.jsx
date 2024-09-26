@@ -1,19 +1,77 @@
 /* eslint-disable react-refresh/only-export-components */
 import axios from "axios";
+import { BaseUrl, token } from "./constant";
 
-let token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ODg0ZjdmNzRlYWRlZWU2MmIxOGVlMjExNDg0NGY5MCIsIm5iZiI6MTcyNzI1NTA4Ny40MDc1MTUsInN1YiI6IjY2ZjNjZGQzNzQwMTM4NjQxZTY5ZWNlZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.bX2-5iXjwCdQpUvLB72wJ0phAorzsdfdBW7MsxGWhF8";
-let BaseUrl = "https://api.themoviedb.org/3";
+export const randomeNumberGenrator = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
 
 export const helperfunction = async (urlEndPoint) => {
   try {
-    let response = await axios.get(`${BaseUrl+urlEndPoint}`, {
+    let response = await axios.get(`${BaseUrl + urlEndPoint}`, {
       headers: {
-        Authorization: `bearer ${token}`
-    }});
-    console.log(response?.data);
-    return response?.data
+        Authorization: `bearer ${token}`,
+      },
+    });
+    // console.log(response?.data);
+    return response?.data;
   } catch (error) {
-    console.error('Error fetching trending movies:', error);
+    console.error("Error fetching trending movies:", error);
   }
+};
+
+export const getTmdbUrl = (caseType, type) => {
+  let endpoint;
+
+  console.log(caseType, type);
+
+  switch (caseType) {
+    case "trending":
+      switch (type) {
+        case "day":
+          endpoint = "/trending/all/day";
+          break;
+        case "week":
+          endpoint = "/trending/all/week";
+          break;
+        default:
+          throw new Error(
+            "Invalid time type for trending. Use 'day' or 'week'."
+          );
+      }
+      break;
+
+    case "popular":
+      switch (type) {
+        case "movies":
+          endpoint = "/movie/popular";
+          break;
+        case "tv show":
+          endpoint = "/tv/popular";
+          break;
+        default:
+          throw new Error("Invalid type for popular. Use 'movie' or 'tv'.");
+      }
+      break;
+
+    case "top_rated":
+      switch (type) {
+        case "movies":
+          endpoint = "/movie/top_rated";
+          break;
+        case "tv show":
+          endpoint = "/tv/top_rated";
+          break;
+        default:
+          throw new Error("Invalid type for top rated. Use 'movie' or 'tv'.");
+      }
+      break;
+
+    default:
+      throw new Error(
+        "Invalid case type. Use 'trending', 'popular', or 'top_rated'."
+      );
+  }
+
+  return `${endpoint}`;
 };

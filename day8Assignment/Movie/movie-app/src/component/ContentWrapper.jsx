@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/prop-types */
 
-// linear-gradient(98.37deg, #f89e00 .99%, #da2f68 100%)
-
-const ContentWrapper = ({title,firstTab,secondTab}) => {
-    const [activeTab, setActiveTab] = useState(firstTab);
-
-    useEffect(()=>{
-      setActiveTab(firstTab);
-    },[firstTab])
-
-    return (
-      <div className="flex items-center justify-between mb-5 w-full max-w-6xl mx-auto px-5">
-        <span className="text-2xl text-white font-semibold">{title}</span>
+const ContentWrapper = ({
+  title,
+  firstTab,
+  secondTab,
+  activeTab,
+  setActiveTab,
+  parentClass
+}) => {
+  return (
+    <div className={`flex items-center justify-between mb-5 w-full max-w-6xl mx-auto px-5 ${parentClass}`}>
+      <span className="text-2xl text-white font-semibold">{title}</span>
+      {firstTab && secondTab && (
         <div className="bg-white rounded-full p-1">
           <div className="flex">
             <span
@@ -36,8 +36,9 @@ const ContentWrapper = ({title,firstTab,secondTab}) => {
             </span>
           </div>
         </div>
-      </div>
-    );
+      )}
+    </div>
+  );
 };
 
 export default ContentWrapper;

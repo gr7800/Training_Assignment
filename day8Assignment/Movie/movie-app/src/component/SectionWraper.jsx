@@ -1,24 +1,25 @@
-import { useEffect, useState } from "react";
-import { helperfunction } from "../utills/helper";
 import ContentWrapper from "./ContentWrapper";
 import Carousel from "./Crousel";
 
-const SectionWraper = ({title,firstTab,secondTab,urlEndPoint}) => {
-  let [trendingMovies, setTrendingMovies] = useState([]);
-
-  let fetchTrendingData = async () => {
-    let temp = await helperfunction(urlEndPoint);
-    setTrendingMovies(temp);
-  };
-
-  useEffect(() => {
-    // fetchTrendingData();
-  }, []);
-
+const SectionWraper = ({
+  title,
+  firstTab,
+  secondTab,
+  activeTab,
+  setActiveTab,
+  trendingMovies,
+  genres,
+}) => {
   return (
     <div>
-      <ContentWrapper title={title} firstTab={firstTab} secondTab={secondTab} />
-      <Carousel MovieList={[]} />
+      <ContentWrapper
+        title={title}
+        firstTab={firstTab}
+        secondTab={secondTab}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+      <Carousel movieList={trendingMovies} genres={genres} />
     </div>
   );
 };

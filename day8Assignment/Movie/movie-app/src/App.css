@@ -1,6 +1,24 @@
-body{
-    padding: 0px;
-    margin: 0px;
-    background-color: #04152d;
-    box-sizing: content-box;
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #04152d;
+  box-sizing: content-box;
+}
+
+.modal-enter {
+  transform: translateY(-100%);
+}
+
+.modal-enter-active {
+  transform: translateY(0);
+  transition: transform 300ms ease-in;
+}
+
+.modal-exit {
+  transform: translateY(0);
+}
+
+.modal-exit-active {
+  transform: translateY(-100%);
+  transition: transform 300ms ease-in;
 }
