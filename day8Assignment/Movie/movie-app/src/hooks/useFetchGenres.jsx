@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { helperfunction } from "../utills/helper";
 
-const useFetchGenres = () => {
+const useFetchGenres = (contentName) => {
   const [genres, setGenres] = useState({});
   const [genresList, setGenresList] = useState([]);
 
   const fetchGenres = async () => {
-    const response = await helperfunction("/genre/movie/list");
+    const response = await helperfunction(
+      `/genre/${contentName || "movie"}/list`
+    );
     const genresObj = {};
     if (response?.genres && response.genres.length > 0) {
       setGenresList(response?.genres);

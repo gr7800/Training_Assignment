@@ -1,24 +1,33 @@
 /* eslint-disable react/prop-types */
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
-const RatingCircularProgress = ({ rating }) => {
-  const getPathColor = ()=>{
-    if(Number(rating)>=7){
-      return "green"
-    }else if(Number(rating)>=5){
-      return "orange"
-    }else{
-      return "red"
+const RatingCircularProgress = ({
+  rating,
+  className,
+  textColor,
+  width,
+  height,
+}) => {
+  const getPathColor = () => {
+    if (Number(rating) >= 7) {
+      return "green";
+    } else if (Number(rating) >= 5) {
+      return "orange";
+    } else {
+      return "red";
     }
-  }
+  };
   return (
-    <div style={{ width: 50, height: 50 }} className="rounded-full bg-white text-lg font-semibold absolute -bottom-6 left-5">
+    <div
+      style={{ width: width || 50, height: height || 50 }}
+      className={`rounded-full bg-white text-lg font-semibold absolute -bottom-6 left-5 ${className}`}
+    >
       <CircularProgressbar
-        value={(Number(rating)/10)*100}
+        value={(Number(rating) / 10) * 100}
         text={rating}
         styles={buildStyles({
-          textColor: "#000000",
+          textColor: textColor || "#000000",
           pathColor: getPathColor(),
         })}
       />

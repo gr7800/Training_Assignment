@@ -45,6 +45,12 @@ const SearchResultPage = () => {
     };
   }, [isFetching]);
 
+  if(searchList.length==0){
+    return <div className="flex w-full h-screen text-xl font-semibold px-10 pt-[100px] text-white">
+      <span>Sorry, Results not found!</span>
+    </div>
+  }
+
   return (
     <div className="w-full pt-[100px] px-10">
       <ContentWrapper title={`Search results for '${initialQuery}'`} parentClass={"justify-start items-start mx-0 font-normal text-xl"} />

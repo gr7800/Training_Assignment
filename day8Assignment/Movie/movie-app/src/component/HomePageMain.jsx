@@ -1,8 +1,29 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const HomePageMain = ({ randomImage }) => {
-  const [searchQuerry, setSearchQuerry] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const navigate = useNavigate();
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && searchQuery.length > 0) {
+      navigate(`/search/${searchQuery}`);
+    }
+  };
+
+  const handleClick = () => {
+    if (searchQuery.length > 0) {
+      navigate(`/search/${searchQuery}`);
+    }
+  };
+
+  useEffect(() => {
+    setSearchQuery(currentPath?.split("/search/")[1]);
+  }, [currentPath]);
 
   return (
     <div className="relative w-full h-full flex flex-col justify-center items-center text-white px-[3rem]">
@@ -25,14 +46,16 @@ const HomePageMain = ({ randomImage }) => {
           className="w-[70%] h-[50px] px-5 py-3 rounded-l-full text-black text-[20px]"
           type="text"
           placeholder="Search for a movie or tv show..."
-          value={searchQuerry}
-          onChange={(e) => setSearchQuerry(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={handleKeyPress}
         />
         <button
           className="w-[30%] h-[3.125rem] text-[1.125rem] text-white rounded-r-full"
           style={{
             background: "linear-gradient(98.37deg, #f89e00 .99%, #da2f68 100%)",
           }}
+          onClick={handleClick}
         >
           Search
         </button>

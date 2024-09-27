@@ -4,7 +4,7 @@ import useFetchMovies from "../hooks/useFetchMovies";
 import { useState } from "react";
 import { randomeNumberGenrator } from "../utills/helper";
 import { ImageBaseUrl } from "../utills/constant";
-import HomeSectionWraper from "../component/HomeSectionWraper";
+import HomeSectionWraper from "../component/HomeSectionWraper"
 
 const Home = () => {
   const [activeTabTrending, setActiveTabTrending] = useState("Day");
@@ -43,7 +43,7 @@ const Home = () => {
         />
       </div>
       <div>
-        <SectionWraper
+        <HomeSectionWraper
           title={"What's Popular"}
           firstTab={"Movies"}
           secondTab={"Tv Show"}
@@ -56,7 +56,7 @@ const Home = () => {
         />
       </div>
       <div>
-        <SectionWraper
+        <HomeSectionWraper
           title={"Top Rated"}
           firstTab={"Movies"}
           secondTab={"Tv Show"}

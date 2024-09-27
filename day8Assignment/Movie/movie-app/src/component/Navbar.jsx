@@ -15,8 +15,8 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex gap-5 text-white justify-center items-center text-center">
-          <Link to="/movies">Movies</Link>
-          <Link to="/tvshow">Tv Shows</Link>
+          <Link to="/movie">Movies</Link>
+          <Link to="/tv">Tv Shows</Link>
           <span onClick={() => setIsModalOpen((prev) => !prev)}>
             <i className="fa-solid fa-magnifying-glass cursor-pointer"></i>
           </span>

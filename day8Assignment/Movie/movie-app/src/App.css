@@ -22,3 +22,44 @@ body {
   transform: translateY(-100%);
   transition: transform 300ms ease-in;
 }
+
+.playbtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s;
+  color: white;
+}
+
+.playbtn:hover {
+  color: #da2f68;
+}
+
+.playbtn:hover .triangle,
+.playbtn:hover .circle {
+  stroke: #da2f68;
+}
+
+.triangle,
+.circle {
+  stroke: white;
+  stroke-width: 7px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10px;
+}
+
+.text {
+  margin-left: 10px;
+  font-size: 16px;
+  transition: color 0.3s;
+}
+.elepsis-overflow{
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+}

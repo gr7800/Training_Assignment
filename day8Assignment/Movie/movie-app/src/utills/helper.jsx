@@ -75,3 +75,16 @@ export const getTmdbUrl = (caseType, type) => {
 
   return `${endpoint}`;
 };
+
+export const sortingList = () => {
+  const sortingList = [
+    { id: "popularity.asc", name: "Popularity Ascending" },
+    { id: "popularity.desc", name: "Popularity Decending" },
+    { id: "vote_average.asc", name: "Rating Ascending" },
+    { id: "vote_average.desc", name: "Rating Decending" },
+    { id: "primary_release_date.asc", name: "Release Date Ascending" },
+    { id: "primary_release_date.desc", name: "Release Date Decending" },
+    { id: "original_title.asc", name: "Title (A-Z)" },
+  ];
+  return sortingList;
+};
