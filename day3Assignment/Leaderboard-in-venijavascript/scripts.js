@@ -35,7 +35,7 @@ const populateData = (data) => {
     data.forEach((element, index) => {
         let Card = document.createElement("div");
         let name = document.createElement("p");
-        name.innerText = element.name;
+        name.innerText = element.fname+" "+element?.lname;
         let countryname = document.createElement("p");
         countryname.innerText = element.countryname;
         let score = document.createElement("p");
