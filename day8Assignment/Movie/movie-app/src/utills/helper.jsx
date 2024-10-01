@@ -1,6 +1,8 @@
 /* eslint-disable react-refresh/only-export-components */
 import axios from "axios";
-import { BaseUrl, token } from "./constant";
+import { BaseUrl } from "./constant";
+ 
+const token = process.env.TOKEN;
 
 export const randomeNumberGenrator = (min, max) => {
   return Math.floor(Math.random() * (max - min) + min);
@@ -13,7 +15,6 @@ export const helperfunction = async (urlEndPoint) => {
         Authorization: `bearer ${token}`,
       },
     });
-    // console.log(response?.data);
     return response?.data;
   } catch (error) {
     console.error("Error fetching trending movies:", error);
