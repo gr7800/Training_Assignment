@@ -4,6 +4,9 @@ import Home from "../pages/Home";
 import Products from "../pages/Products";
 import Cart from "../pages/Cart";
 import Blog from "../pages/Blog";
+import { fetchData, handleCartFetch } from "../utils/helper";
+import { BaseUrlProduct } from "../utils/constant";
+
 
 const router = createBrowserRouter([
   {
@@ -13,14 +16,17 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+        loader: () => fetchData(`${BaseUrlProduct}?limit=4`)
       },
       {
-        path: "/product",
+        path: "/products",
         element: <Products />,
+        loader: () => fetchData(BaseUrlProduct)
       },
       {
         path: "/cart",
         element: <Cart />,
+        loader: handleCartFetch
       },
       {
         path: "/blog",
