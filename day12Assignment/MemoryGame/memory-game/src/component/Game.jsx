@@ -3,10 +3,11 @@ import { byDefaultImageUrl, imageUrlArray } from "../utils/constants";
 import { shuffleArray } from "../utils/helper";
 import FlipCard from "./FlipCard";
 import Result from "./Result";
+import MusicPlayer from "./MusicPlayer";
 
-const GAME_DURATION = 60; 
+const GAME_DURATION = 60;
 
-const Game = ({ isStart, setIsStart }) => {
+const Game = ({ isStart, setIsStart, difficultyLevel }) => {
   const [score, setScore] = useState(0);
   const [clickCount, setClickCount] = useState(0);
   const [imageArray, setImageArray] = useState([]);
@@ -16,8 +17,8 @@ const Game = ({ isStart, setIsStart }) => {
   const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
-    if (isStart) {
-      startNewGame();
+    if (isStart && difficultyLevel) {
+      startNewGame(difficultyLevel);
     }
   }, [isStart]);
 
@@ -32,8 +33,9 @@ const Game = ({ isStart, setIsStart }) => {
     }
   }, [remainingTime, gameOver]);
 
-  const startNewGame = () => {
-    const shuffledArray = shuffleArray(imageUrlArray);
+  const startNewGame = (difficultyLevel) => {
+    let imageArray = imageUrlArray.slice(0, difficultyLevel);
+    const shuffledArray = shuffleArray([...imageArray, ...imageArray]);
     setImageArray(shuffledArray);
     setScore(0);
     setClickCount(0);
@@ -46,26 +48,29 @@ const Game = ({ isStart, setIsStart }) => {
     (index) => {
       if (isChecking || imageArray[index].isFlipped || gameOver) return;
 
-      const updatedImageArray = [...imageArray];
-      updatedImageArray[index] = { ...updatedImageArray[index], isFlipped: true };
-      setImageArray(updatedImageArray);
+      const updatedArray = [...imageArray];
+      updatedArray[index] = {
+        ...updatedArray[index],
+        isFlipped: true,
+      };
+      setImageArray(updatedArray);
       setClickCount((prev) => prev + 1);
 
       if (firstCardIndex === null) {
         setFirstCardIndex(index);
       } else {
         setIsChecking(true);
-        const firstCard = updatedImageArray[firstCardIndex];
+        const firstCard = updatedArray[firstCardIndex];
 
-        if (firstCard.id === updatedImageArray[index].id) {
+        if (firstCard.id === updatedArray[index].id) {
           setScore((prev) => prev + 1);
           setFirstCardIndex(null);
           setIsChecking(false);
         } else {
           setTimeout(() => {
-            updatedImageArray[firstCardIndex].isFlipped = false;
-            updatedImageArray[index].isFlipped = false;
-            setImageArray([...updatedImageArray]);
+            updatedArray[firstCardIndex].isFlipped = false;
+            updatedArray[index].isFlipped = false;
+            setImageArray([...updatedArray]);
             setFirstCardIndex(null);
             setIsChecking(false);
           }, 1000);
@@ -80,10 +85,10 @@ const Game = ({ isStart, setIsStart }) => {
   };
 
   return (
-    <div className="w-full gap-4 p-4 bg-green-400 shadow-lg shadow-white rounded-xl">
+    <div className="w-full gap-4 p-4 bg-gray-600 bg-opacity-[50%] shadow-lg shadow-white rounded-xl">
       {!gameOver ? (
         <div className="flex gap-5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
             {imageArray.map((el, index) => (
               <div
                 key={index}
@@ -99,13 +104,23 @@ const Game = ({ isStart, setIsStart }) => {
             ))}
           </div>
           <div className="flex flex-col items-center gap-2 text-red-500">
-            <span className="text-lg bg-white shadow-lg border-red-500 border-2 rounded-full p-2 text-red-500">{remainingTime}s</span>
+            <span className="text-lg bg-white shadow-lg border-red-500 border-2 rounded-full p-2 text-red-500 bg-opacity-[30%]">
+              {remainingTime}s
+            </span>
             <span className="text-lg">Clicks: {clickCount}</span>
             <span className="text-lg">Score: {score}</span>
           </div>
         </div>
       ) : (
-        <Result clickCount={clickCount} score={score} handleRestart={handleRestart} />
+        <Result
+          clickCount={clickCount}
+          score={score}
+          handleRestart={handleRestart}
+        />
+      )}
+
+      {isStart&&(
+        <MusicPlayer start={isStart} />
       )}
     </div>
   );

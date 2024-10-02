@@ -2,7 +2,7 @@ import React from 'react';
 
 const FlipCard = ({ isFlipped, frontImage, backImage }) => {
   return (
-    <div className="w-full h-full min-w-[6.25rem] min-h-[6.25rem] perspective">
+    <div className="w-full h-full min-w-[3.25rem] min-h-[3.25rem] sm:min-w-[6.25rem] sm:min-h-[6.25rem] perspective">
       <div
         className={`relative w-full h-full transform-style-preserve-3d transition-transform duration-600 ${isFlipped ? 'rotate-y-180' : ''}`}
       >
