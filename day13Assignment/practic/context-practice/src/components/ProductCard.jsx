@@ -34,7 +34,7 @@ const ProductCard = ({ product }) => {
 
       <div className="flex justify-between">
         <span className="inline-block bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-semibold w-fit">
-          ${product?.price}
+          {product?.price.toFixed(2) + " "} {product?.currencietype || "$ "}
         </span>
         {!existedProduct && (
           <span className="flex justify-center items-center bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-semibold w-fit cursor-pointer">

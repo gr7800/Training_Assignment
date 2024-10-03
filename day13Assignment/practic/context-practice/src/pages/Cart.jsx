@@ -5,30 +5,25 @@ import ProductCard from "../components/ProductCard";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { OptionOfCarrencyExchange } from "../utils/constant";
 const Cart = ({ errorOnCurrencyChange }) => {
-  const { cart, totalPrice } = useContext(CartContext);
+  const { cart, totalPrice, cartCurrencyChange } = useContext(CartContext);
   const data = useLoaderData();
-  const [total, setTotal] = useState(totalPrice);
-  const [currencyName, setCurrencyName] = useState("USD");
+  const [currencyName, setCurrencyName] = useState(cart.currencietype || "USD");
   const navigate = useNavigate();
 
   const handleCurrencyChange = (e) => {
     e.preventDefault();
     let value = e.target.value;
 
-    value != "USD"
-      ? navigate(`/cart?base=${currencyName}&to=${value}&amount=${total}`)
-      : navigate("/cart");
+    value && navigate(`/cart?base=${currencyName}&to=${value}`);
   };
 
   useEffect(() => {
     if (data && data?.converted) {
-      setTotal(Math.floor(data.converted));
+      console.log(data);
+      cartCurrencyChange(data.converted, data.to);
       setCurrencyName(data?.to);
-    } else {
-      setTotal(Math.floor(totalPrice));
-      setCurrencyName("USD");
     }
-  }, [totalPrice, data]);
+  }, [data]);
 
   if (cart.length == 0) {
     return (
@@ -47,7 +42,7 @@ const Cart = ({ errorOnCurrencyChange }) => {
       <h1 className="text-3xl font-bold text-center">Featured Product List</h1>
       <div className="flex px-4 py-2 my-4 bg-gray-900 text-white gap-4 items-center font-bold">
         <span>
-          Total : {total} {currencyName}
+          Total : {totalPrice.toFixed(2)} {currencyName}
         </span>
         {!errorOnCurrencyChange && (
           <span>

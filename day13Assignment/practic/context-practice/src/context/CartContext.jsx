@@ -23,6 +23,15 @@ export const CartContextProvider = ({ children }) => {
     setCart((prev) => prev.filter((el) => el.id !== id));
   };
 
+  const cartCurrencyChange = (rate, currencietype) => {
+    setCart((prev) =>
+      prev.map((el) => {
+        console.log(el);
+        return { ...el, price: rate * el.price, currencietype: currencietype };
+      })
+    );
+  };
+
   useEffect(() => {
     setTotalPrice(
       cart.reduce((acc, value) => acc + value.price * value.quantity, 0)
@@ -30,10 +39,16 @@ export const CartContextProvider = ({ children }) => {
     localStorage.setItem("ecomerceCart", JSON.stringify(cart));
   }, [cart]);
 
-
   return (
     <CartContext.Provider
-      value={{ cart, totalPrice, addToCart, updateCart, deleteCartItem }}
+      value={{
+        cart,
+        totalPrice,
+        addToCart,
+        updateCart,
+        deleteCartItem,
+        cartCurrencyChange,
+      }}
     >
       {children}
     </CartContext.Provider>

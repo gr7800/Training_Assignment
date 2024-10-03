@@ -16,10 +16,9 @@ export const handleCartFetch = async ({ request }) => {
 
   const base = searchParams.get("base");
   const to = searchParams.get("to");
-  const amount = searchParams.get("amount");
-  if (base && to && amount) {
+  if (base && to) {
     const data = await fetchData(
-      `${CurrencyChangeUrl}?base=${base}&to=${to}&amount=${amount}&apiKey=${ApiKey}`
+      `${CurrencyChangeUrl}?base=${base}&to=${to}&amount=${1}&apiKey=${ApiKey}`
     );
     return data;
   }
