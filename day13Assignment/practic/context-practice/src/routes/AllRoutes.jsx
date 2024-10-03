@@ -4,9 +4,14 @@ import Home from "../pages/Home";
 import Products from "../pages/Products";
 import Cart from "../pages/Cart";
 import Blog from "../pages/Blog";
-import { fetchData, handleCartFetch } from "../utils/helper";
-import { BaseUrlProduct } from "../utils/constant";
-
+import {
+  fetchData,
+  handleCartFetch,
+  handleSingleBlogFetch,
+} from "../utils/helper";
+import { BaseBlogUrl, BaseUrlProduct } from "../utils/constant";
+import SingleBlog from "../pages/SingleBlog";
+import NotFoundPage from "../pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -16,23 +21,39 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
-        loader: () => fetchData(`${BaseUrlProduct}?limit=4`)
+        loader: () => fetchData(`${BaseUrlProduct}?limit=4`),
       },
       {
         path: "/products",
         element: <Products />,
-        loader: () => fetchData(BaseUrlProduct)
+        loader: () => fetchData(BaseUrlProduct),
       },
       {
         path: "/cart",
-        element: <Cart />,
-        loader: handleCartFetch
+        element: <Cart errorOnCurrencyChange={false}/>,
+        loader: handleCartFetch,
+        errorElement: <Cart errorOnCurrencyChange={true}/>,
       },
       {
         path: "/blog",
-        element: <Blog />,
+        children: [
+          {
+            index: true,
+            element: <Blog />,
+            loader: () => fetchData(BaseBlogUrl),
+          },
+          {
+            path: ":id",
+            element: <SingleBlog />,
+            loader: handleSingleBlogFetch,
+          },
+        ],
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 

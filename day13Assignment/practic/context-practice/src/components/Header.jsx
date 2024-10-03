@@ -11,7 +11,7 @@ const Header = () => {
       </h1>
       <ul className="flex gap-3">
         <Link to="/products">Products</Link>
-        <Link to="/blog">Blog</Link>
+        <Link to="/blog?page=1">Blog</Link>
         <Link to="/cart">{`Cart(${cart.length})`}</Link>
       </ul>
     </header>

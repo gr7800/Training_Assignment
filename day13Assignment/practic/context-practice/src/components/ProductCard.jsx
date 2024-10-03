@@ -1,26 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
 import { BiSolidCartAdd } from "react-icons/bi";
-import { CartContext } from '../context/CartContext';
-import CartButton from './CartButton';
+import { CartContext } from "../context/CartContext";
+import CartButton from "./CartButton";
 
 const ProductCard = ({ product }) => {
   const [existedProduct, setExistedProduct] = useState(null);
-  const { cart, addToCart } = useContext(CartContext)
+  const { cart, addToCart } = useContext(CartContext);
 
   useEffect(() => {
     if (cart.length > 0) {
-      const foundProduct = cart.find(el => el.id === product.id);
+      const foundProduct = cart.find((el) => el.id === product.id);
       setExistedProduct(foundProduct ? foundProduct : null);
-    }else{
-      setExistedProduct(null)
+    } else {
+      setExistedProduct(null);
     }
-  }, [cart])
+  }, [cart]);
 
   return (
-    <div
-      className="max-w-sm rounded-lg overflow-hidden shadow-md bg-white transition-transform transform hover:scale-105 flex flex-col gap-4 p-4"
-    >
+    <div className="max-w-sm rounded-lg overflow-hidden shadow-md bg-white transition-transform transform hover:scale-105 flex flex-col gap-4 p-4">
       <div className="h-64 overflow-hidden flex items-center justify-center bg-gray-100">
         <img
           className="object-contain h-full w-full"
@@ -39,13 +36,13 @@ const ProductCard = ({ product }) => {
         <span className="inline-block bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-semibold w-fit">
           ${product?.price}
         </span>
-        {!existedProduct && <span className="flex justify-center items-center bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-semibold w-fit cursor-pointer">
-          <BiSolidCartAdd onClick={() => addToCart(product)} />
-        </span>}
+        {!existedProduct && (
+          <span className="flex justify-center items-center bg-green-100 text-green-700 rounded-full px-3 py-1 text-sm font-semibold w-fit cursor-pointer">
+            <BiSolidCartAdd onClick={() => addToCart(product)} />
+          </span>
+        )}
       </div>
-      <div>
-        {existedProduct && <CartButton product={existedProduct} />}
-      </div>
+      <div>{existedProduct && <CartButton product={existedProduct} />}</div>
     </div>
   );
 };

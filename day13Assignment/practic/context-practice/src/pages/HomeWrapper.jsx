@@ -5,11 +5,11 @@ import Footer from "../components/Footer";
 
 const HomeWrapper = () => {
   return (
-    <>
+    <div className="relative pb-[300px] min-h-screen">
       <Header/>
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 
