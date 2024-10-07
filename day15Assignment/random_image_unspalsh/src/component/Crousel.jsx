@@ -24,11 +24,11 @@ const Carousel = ({ images, autoSlide = false, autoSlideInterval = 10000 }) => {
 
   return (
     <div className="relative w-full h-[70vh]">
-      <div className="relative h-[70vh] w-full flex justify-center items-center overflow-hidden border-2 border-gray-300 shadow-lg shadow-black">
+      <div className="absolute translate-x-0 inset-0 transition-transform ease-out delay-500  h-[70vh] w-full flex justify-center items-center overflow-hidden border-2 border-gray-300 shadow-lg shadow-black">
         <img
           src={images[currentIndex]?.urls.full}
           alt="Carousel Image"
-          className="w-full h-[70vh] object-cover rounded-lg"
+          className={`w-full h-[70vh] object-cover rounded-lg`} 
         />
       </div>
       <div
