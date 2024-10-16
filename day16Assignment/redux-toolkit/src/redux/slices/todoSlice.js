@@ -62,8 +62,15 @@ const todoSlice = createSlice({
 export const selectTodo = (state) => state.todo.todos;
 export const selectInput = (state) => state.todo.input;
 export const isEditing = (state) => state.todo.isEditing;
+export const editTaskId = (state) => state.todo.editTaskId;
 
-export const { setInput,toggleTaskStatus, addTask, startEditingTask, updateTask, deleteTask } =
-  todoSlice.actions;
+export const {
+  setInput,
+  toggleTaskStatus,
+  addTask,
+  startEditingTask,
+  updateTask,
+  deleteTask,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

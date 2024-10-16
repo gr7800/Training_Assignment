@@ -1,6 +1,5 @@
 import React from 'react'
 import TodoList from '../component/TodoList'
-import UpdateModel from '../component/UpdateModel'
 import AddModel from '../component/AddModel'
 
 const Todo = () => {

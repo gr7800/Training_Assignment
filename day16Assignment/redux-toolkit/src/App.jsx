@@ -1,11 +1,16 @@
-import './App.css'
-import Todo from './pages/Todo'
+import "./App.css";
+import ProductPage from "./pages/Products";
+import SingleProductPage from "./pages/SingleProductPage";
+import Todo from "./pages/Todo";
 
 function App() {
-
   return (
-    <Todo />
-  )
+    <>
+      <Todo />
+      {/* <ProductPage />
+      <SingleProductPage /> */}
+    </>
+  );
 }
 
-export default App
+export default App;
