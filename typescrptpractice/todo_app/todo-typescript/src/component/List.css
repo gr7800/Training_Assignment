@@ -1,0 +1,33 @@
+.ListContainer {
+  width: 60vw;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border: 2px solid white;
+  font-weight: 600;
+}
+
+thead {
+  background-color: #2980b9;
+  color: white;
+  font-weight: bold;
+}
+
+tbody {
+  background-color: #ecf0f1;
+}
+
+td>button{
+  background-color: #da4040;
+  color: #ecf0f1;
+}
