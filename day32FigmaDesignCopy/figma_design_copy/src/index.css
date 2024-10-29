@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "Sansation_Regular";
+  src: url("./assets/fonts/sansation/Sansation_Regular.ttf") format("truetype");
+}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
