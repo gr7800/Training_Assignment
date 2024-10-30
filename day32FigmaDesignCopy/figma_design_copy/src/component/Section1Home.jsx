@@ -10,7 +10,7 @@ import { FaCartPlus } from "react-icons/fa";
 const Section1Home = () => {
   return (
     <div>
-      <div className="w-full h-full bg-[#1E2A2F] px-6 py-8 md:px-[48px] lg:px-[95px] lg:py-[56px]">
+      <div className="w-full h-full bg-[#1E2A2F] px-6 py-8 md:px-[48px] lg:px-[95px] lg:py-[56px] font-sansation">
         <div className="max-w-[1360px] m-auto flex flex-col lg:flex-row justify-center items-center gap-10">
           <div className="relative w-full lg:w-1/2">
             <img
